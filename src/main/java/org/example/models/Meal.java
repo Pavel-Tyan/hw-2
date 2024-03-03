@@ -1,4 +1,4 @@
-package org.example;
+package org.example.models;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

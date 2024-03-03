@@ -14,6 +14,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     compileOnly ("org.projectlombok:lombok:1.18.20")
     annotationProcessor ("org.projectlombok:lombok:1.18.20")
+    implementation("org.mindrot:jbcrypt:0.3m")
 }
 
 tasks.test {
