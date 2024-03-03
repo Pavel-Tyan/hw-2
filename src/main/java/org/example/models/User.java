@@ -15,18 +15,22 @@ import java.util.Objects;
 public class User implements Serializable {
     private boolean isAdmin;
     private String login;
+    private transient String password;
     private String passwordHash;
 
+    private static String salt = BCrypt.gensalt();
     public User(String userLogin, String userPassword) {
         login = userLogin;
-        String salt = BCrypt.gensalt();
+        //String salt = BCrypt.gensalt();
+        password = userPassword;
         passwordHash = BCrypt.hashpw(userPassword, salt);
         isAdmin = false;
     }
 
     public User(String userLogin, String userPassword, String passsword) {
         login = userLogin;
-        String salt = BCrypt.gensalt();
+        //String salt = BCrypt.gensalt();
+        password = userPassword;
         passwordHash = BCrypt.hashpw(userPassword, salt);
         isAdmin = true;
     }
@@ -35,7 +39,7 @@ public class User implements Serializable {
     public boolean equals(Object user) {
         User otherUser = (User) user;
         return this.isAdmin == otherUser.isAdmin &&
-                Objects.equals(this.login, ((User) user).login) &&
-                Objects.equals(this.passwordHash, ((User) user).passwordHash);
+                Objects.equals(login, ((User) user).login) &&
+                BCrypt.checkpw(password, ((User) user).passwordHash);
     }
 }
