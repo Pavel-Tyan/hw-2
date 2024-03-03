@@ -1,5 +1,7 @@
 package org.example.models;
 
-public class Profit {
+import java.io.Serializable;
+
+public class Profit implements Serializable {
     private double money;
 }
