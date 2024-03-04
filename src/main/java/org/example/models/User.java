@@ -1,6 +1,8 @@
 package org.example.models;
 
 import lombok.*;
+
+import lombok.extern.jackson.Jacksonized;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serializable;
@@ -10,7 +12,9 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class User implements Serializable {
+
     private boolean isAdmin;
     private String login;
     private transient String password;

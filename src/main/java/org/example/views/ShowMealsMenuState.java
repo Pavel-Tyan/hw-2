@@ -16,7 +16,7 @@ public class ShowMealsMenuState implements MenuState{
     public User doCommand(User user) {
         for (Meal meal : mealController.findAllMeals()) {
             System.out.println(String.format("Название: %s, цена: %f, количество: %d, " +
-                    "время готовки в минутах: $d",
+                    "время готовки в минутах: %d",
                     meal.getName(),
                     meal.getPrice(),
                     meal.getCount(),

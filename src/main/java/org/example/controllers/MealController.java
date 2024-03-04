@@ -12,6 +12,16 @@ import java.util.List;
 @AllArgsConstructor
 public class MealController {
     private MealService mealService;
+
+//    public Order findOrderByUserLogin(String login) {
+//        for (Order currentOrder: orders) {
+//            if (currentOrder.getCustomer().getLogin().equals(login)) {
+//                return currentOrder;
+//            }
+//        }
+//
+//        throw new ResourceNotFoundException("Такой пользователь ничего не заказывал.");
+//    }
     public boolean isMealExists(String name) {
         try {
             mealService.findMealByName(name);

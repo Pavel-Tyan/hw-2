@@ -43,7 +43,7 @@ public class Menu {
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("Некорректный ввод числа. Повторите попытку.");
-                continue;
+                break;
             }
 
             if (!isCorrectCommand(commandNumber)) {

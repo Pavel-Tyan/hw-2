@@ -2,12 +2,16 @@ package org.example.views;
 
 import lombok.NoArgsConstructor;
 import org.example.controllers.MealController;
+import org.example.controllers.OrderController;
 import org.example.controllers.UserController;
 import org.example.repositories.MealRepository;
+import org.example.repositories.OrderRepository;
 import org.example.repositories.UserRepository;
 import org.example.services.MealService;
+import org.example.services.OrderService;
 import org.example.services.UserService;
 import org.example.services.implementations.MealServiceImplementation;
+import org.example.services.implementations.OrderServiceImplementation;
 import org.example.services.implementations.UserServiceImplementation;
 
 import java.util.ArrayList;
@@ -17,15 +21,19 @@ import java.util.List;
 @NoArgsConstructor
 public class RestaurantFacade {
     private Menu menu;
+
     private MealController mealController;
     private UserController userController;
+    private OrderController orderController;
 
     private MealService mealService;
     private UserService userService;
+    private OrderService orderService;
 
     private MealRepository mealRepository;
 
     private UserRepository userRepository;
+    private OrderRepository orderRepository;
 
     public void runApp() {
         configureApp();
@@ -39,15 +47,29 @@ public class RestaurantFacade {
     }
 
     public void configureApp() {
+        configureRepositories();
+        configureServices();
+        configureControllers();
+        configureMenu();
+    }
+
+    public void configureRepositories() {
         mealRepository = new MealRepository();
         userRepository = new UserRepository();
-
+        orderRepository = new OrderRepository();
+    }
+    public void configureServices() {
         mealService = new MealServiceImplementation(mealRepository);
         userService = new UserServiceImplementation(userRepository);
-
+        orderService = new OrderServiceImplementation(orderRepository);
+    }
+    public void configureControllers() {
         mealController = new MealController(mealService);
         userController = new UserController(userService);
+        orderController = new OrderController(orderService);
+    }
 
+    public void configureMenu() {
         MenuState registerState = new RegisterState(userController);
         MenuState authState = new AuthState(userController);
         MenuState showMealsMenuState = new ShowMealsMenuState(mealController);

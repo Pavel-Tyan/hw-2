@@ -59,7 +59,8 @@ public class MealServiceImplementation implements MealService {
     public void updateMeal(Meal meal) {
         for (Meal currentMeal: mealRepository.getMeals()) {
             if (meal.getName().equals(currentMeal.getName())) {
-                currentMeal = meal;
+                mealRepository.getMeals().remove(currentMeal);
+                mealRepository.getMeals().add(meal);
                 mealRepository.serializeMeals();
                 return;
             }
