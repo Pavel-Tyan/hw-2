@@ -8,6 +8,6 @@ public interface MealService {
     Meal findMealByName(String name);
     List<Meal> findAllMeals();
     void addNewMeal(Meal meal);
-    void deleteMeal(String name);
+    void deleteMealByName(String name);
     void updateMeal(Meal meal);
 }

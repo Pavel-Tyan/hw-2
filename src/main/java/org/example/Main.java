@@ -8,18 +8,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat")))
-//        {
-//            ArrayList<User> users = new ArrayList<>();
-//            users.add(new User( "ddd", "admin"));
-//            oos.writeObject(users);
-//        }
-//        catch (IOException ex) {
-//            System.out.println("Сериализация пользователей не удалась");
-//        } catch (Exception ex){
-//            System.out.println(ex.getMessage());
-//        }
-////
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat")))
+        {
+            ArrayList<User> users = new ArrayList<>();
+            users.add(new User( "ddd", "admin"));
+            oos.writeObject(users);
+        }
+        catch (IOException ex) {
+            System.out.println("Сериализация пользователей не удалась");
+        } catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+//
 //        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("meals.dat")))
 //        {
 //            List<Meal> meals = new ArrayList<Meal>();

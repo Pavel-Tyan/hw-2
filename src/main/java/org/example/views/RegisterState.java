@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class RegisterState implements MenuState{
     private UserController userController;
     @Override
-    public void doCommand(User user) {
+    public User doCommand(User user) {
         String login;
         String password;
 
@@ -51,6 +51,8 @@ public class RegisterState implements MenuState{
                 System.out.println();
             }
         }
+
+        return user;
     }
 
     @Override

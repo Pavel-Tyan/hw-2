@@ -16,7 +16,7 @@ public class Menu {
     List<MenuState> menuStates;
 
     @Setter
-    private User user;
+    private User user = new User();
 
     public void showMenu() {
         for (int i = 0; i < menuStates.size(); i++) {
@@ -24,7 +24,7 @@ public class Menu {
         }
     }
     public void doCommand(int commandNumber) {
-        menuStates.get(commandNumber).doCommand(user);
+        user = menuStates.get(commandNumber).doCommand(user);
         System.out.println();
     }
 

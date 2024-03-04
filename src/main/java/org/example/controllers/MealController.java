@@ -20,6 +20,13 @@ public class MealController {
 
         return true;
     }
+    public void addNewMeal(Meal meal) {
+        mealMenuService.addNewMeal(meal);
+    }
+
+    public void deleteMealByName(String name) {
+        mealMenuService.deleteMealByName(name);
+    }
 
     public List<Meal> findAllMeals() {
         return mealMenuService.findAllMeals();

@@ -44,17 +44,4 @@ public class UserServiceImplementation implements UserService {
         userRepository.getUsers().add(user);
         userRepository.serializeUsers();
     }
-
-    @Override
-    public void deleteUser(String login) {
-        for (User currentUser: userRepository.getUsers()) {
-            if (login.equals(currentUser.getLogin())) {
-                userRepository.getUsers().remove(currentUser);
-                userRepository.serializeUsers();
-                return;
-            }
-        }
-
-        throw new ResourceNotFoundException("Такого пользователя не существует");
-    }
 }

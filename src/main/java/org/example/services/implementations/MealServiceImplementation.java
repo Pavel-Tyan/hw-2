@@ -43,7 +43,7 @@ public class MealServiceImplementation implements MealService {
     }
 
     @Override
-    public void deleteMeal(String name) {
+    public void deleteMealByName(String name) {
         for (Meal currentMeal: mealRepository.getMeals()) {
             if (name.equals(currentMeal.getName())) {
                 mealRepository.getMeals().remove(currentMeal);

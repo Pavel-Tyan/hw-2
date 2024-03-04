@@ -13,7 +13,7 @@ import java.util.List;
 public class ShowMealsMenuState implements MenuState{
     private MealController mealController;
     @Override
-    public void doCommand(User user) {
+    public User doCommand(User user) {
         for (Meal meal : mealController.findAllMeals()) {
             System.out.println(String.format("Название: %s, цена: %f, количество: %d, " +
                     "время готовки в минутах: $d",
@@ -22,6 +22,8 @@ public class ShowMealsMenuState implements MenuState{
                     meal.getCount(),
                     meal.getCookingTimeMinutes()));
         }
+
+        return user;
     }
 
     @Override

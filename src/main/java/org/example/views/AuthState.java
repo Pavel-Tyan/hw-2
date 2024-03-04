@@ -12,18 +12,14 @@ public class AuthState implements MenuState {
 
     private UserController userController;
     @Override
-    public void doCommand(User user) {
-        if (user != null) {
-            System.out.println("Вы уже вошли в какой-то аккаунт.");
-            return;
-        }
-
+    public User doCommand(User user) {
         String login;
         String password;
 
         Scanner scanner = new Scanner(System.in);
 
         boolean hasLogged = false;
+        User currentUser;
 
         while (!hasLogged) {
             System.out.print("Введите логин: ");
@@ -48,7 +44,8 @@ public class AuthState implements MenuState {
             }
 
             try {
-                if (userController.isUserExists(new User(login, password))) {
+                currentUser = new User(login, password);
+                if (userController.isUserExists(currentUser)) {
                     hasLogged = true;
                 } else {
                     System.out.println("Такого пользователя не существует");
@@ -56,17 +53,20 @@ public class AuthState implements MenuState {
                 }
 
                 hasLogged = true;
+
                 System.out.print("Вы успешно вошли в аккаунт.");
                 System.out.println();
+                return currentUser;
             } catch (ResourceAlreadyExistsException ex) {
                 System.out.println(ex.getMessage());
                 System.out.println();
             }
         }
+        return null;
     }
 
     @Override
     public String getCommandInfo() {
-        return "Войти в аккаунт.";
+        return "Войти в аккаунт / Сменить аккаунт.";
     }
 }

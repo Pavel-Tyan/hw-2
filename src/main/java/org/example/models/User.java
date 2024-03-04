@@ -1,17 +1,15 @@
 package org.example.models;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-@Setter(AccessLevel.PRIVATE)
+@Setter
 public class User implements Serializable {
     private boolean isAdmin;
     private String login;
@@ -23,7 +21,7 @@ public class User implements Serializable {
         String salt = BCrypt.gensalt();
         password = userPassword;
         passwordHash = BCrypt.hashpw(userPassword, salt);
-        isAdmin = false;
+        isAdmin = true;
     }
     @Override
     public boolean equals(Object user) {

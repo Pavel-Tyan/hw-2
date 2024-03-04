@@ -51,16 +51,18 @@ public class RestaurantFacade {
 
         MenuState registerState = new RegisterState(userController);
         MenuState authState = new AuthState(userController);
-        MenuState logOutState = new LogOutState();
         MenuState showMealsMenuState = new ShowMealsMenuState(mealController);
+        MenuState addNewMeal = new AddNewMealState(mealController);
+        MenuState deleteMeal = new DeleteMealState(mealController);
         MenuState exitState = new ExitState();
 
         List<MenuState> menuStates = new ArrayList<MenuState>();
 
         menuStates.add(registerState);
         menuStates.add(authState);
-        menuStates.add(logOutState);
         menuStates.add(showMealsMenuState);
+        menuStates.add(addNewMeal);
+        menuStates.add(deleteMeal);
         menuStates.add(exitState);
 
         menu = new Menu(menuStates, null);

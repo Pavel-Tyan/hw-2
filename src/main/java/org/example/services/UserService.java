@@ -8,5 +8,4 @@ public interface UserService {
     boolean isUserExists(User user);
     List<User> findAllUsers();
     void addNewUser(User user);
-    void deleteUser(String login);
 }
