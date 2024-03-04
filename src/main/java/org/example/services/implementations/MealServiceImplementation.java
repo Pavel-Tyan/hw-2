@@ -39,6 +39,7 @@ public class MealServiceImplementation implements MealService {
         }
 
         mealRepository.getMeals().add(meal);
+        mealRepository.serializeMeals();
     }
 
     @Override
@@ -46,6 +47,7 @@ public class MealServiceImplementation implements MealService {
         for (Meal currentMeal: mealRepository.getMeals()) {
             if (name.equals(currentMeal.getName())) {
                 mealRepository.getMeals().remove(currentMeal);
+                mealRepository.serializeMeals();
                 return;
             }
         }
@@ -58,6 +60,7 @@ public class MealServiceImplementation implements MealService {
         for (Meal currentMeal: mealRepository.getMeals()) {
             if (meal.getName().equals(currentMeal.getName())) {
                 currentMeal = meal;
+                mealRepository.serializeMeals();
                 return;
             }
         }

@@ -16,6 +16,9 @@ public class UserServiceImplementation implements UserService {
     private UserRepository userRepository;
     @Override
     public boolean isUserExists(User user) {
+        if (user == null)
+            return false;
+
         for (User currentUser: userRepository.getUsers()) {
             if (user.equals(currentUser)) {
                 return true;
@@ -39,6 +42,7 @@ public class UserServiceImplementation implements UserService {
         }
 
         userRepository.getUsers().add(user);
+        userRepository.serializeUsers();
     }
 
     @Override
@@ -46,6 +50,7 @@ public class UserServiceImplementation implements UserService {
         for (User currentUser: userRepository.getUsers()) {
             if (login.equals(currentUser.getLogin())) {
                 userRepository.getUsers().remove(currentUser);
+                userRepository.serializeUsers();
                 return;
             }
         }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.example.controllers.MealController;
 import org.example.models.Meal;
+import org.example.models.User;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class ShowMealsMenuState implements MenuState{
     private MealController mealController;
     @Override
-    public void doCommand(boolean hasLogged) {
+    public void doCommand(User user) {
         for (Meal meal : mealController.findAllMeals()) {
             System.out.println(String.format("Название: %s, цена: %f, количество: %d, " +
                     "время готовки в минутах: $d",
@@ -20,12 +21,6 @@ public class ShowMealsMenuState implements MenuState{
                     meal.getPrice(),
                     meal.getCount(),
                     meal.getCookingTimeMinutes()));
-        }
-
-        if (!hasLogged) {
-            System.out.println();
-            System.out.println("Чтобы сделать заказ, зарегистрируйтесь!");
-            System.out.println();
         }
     }
 

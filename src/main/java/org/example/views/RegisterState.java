@@ -1,24 +1,19 @@
 package org.example.views;
+
 import lombok.AllArgsConstructor;
 import org.example.controllers.UserController;
 import org.example.exceptions.ResourceAlreadyExistsException;
 import org.example.models.User;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+
 @AllArgsConstructor
 public class RegisterState implements MenuState{
     private UserController userController;
     @Override
-    public void doCommand(boolean hasLogged) {
+    public void doCommand(User user) {
         String login;
         String password;
-
-        if (hasLogged) {
-            System.out.println("Чтобы зарегистрироваться, выйдите из текущего аккаунта.");
-            System.out.println();
-            return;
-        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -26,12 +21,12 @@ public class RegisterState implements MenuState{
 
         while (!hasRegistered) {
             System.out.print("Введите логин: ");
-            login = scanner.nextLine();
+            login = scanner.next();
 
             System.out.println();
 
             System.out.print("Введите пароль: ");
-            password = scanner.nextLine();
+            password = scanner.next();
 
             if (login == null || password == null) {
                 System.out.println("Логин и пароль не должны быть пустыми.");
@@ -60,6 +55,6 @@ public class RegisterState implements MenuState{
 
     @Override
     public String getCommandInfo() {
-        return "Регистрация нового пользователя";
+        return "Зарегистрироваться.";
     }
 }

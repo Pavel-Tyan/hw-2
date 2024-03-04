@@ -22,6 +22,9 @@ public class UserRepository {
         catch (IOException | ClassNotFoundException ex){
             System.out.println("Десериализация пользователей не удалась");
         }
+        catch (Exception ex) {
+            System.out.println("Десериализация пользователей не удалась");
+        }
     }
 
     public void serializeUsers() {

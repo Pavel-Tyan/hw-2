@@ -18,28 +18,17 @@ public class User implements Serializable {
     private transient String password;
     private String passwordHash;
 
-    private static String salt = BCrypt.gensalt();
     public User(String userLogin, String userPassword) {
         login = userLogin;
-        //String salt = BCrypt.gensalt();
+        String salt = BCrypt.gensalt();
         password = userPassword;
         passwordHash = BCrypt.hashpw(userPassword, salt);
         isAdmin = false;
     }
-
-    public User(String userLogin, String userPassword, String passsword) {
-        login = userLogin;
-        //String salt = BCrypt.gensalt();
-        password = userPassword;
-        passwordHash = BCrypt.hashpw(userPassword, salt);
-        isAdmin = true;
-    }
-
     @Override
     public boolean equals(Object user) {
         User otherUser = (User) user;
-        return this.isAdmin == otherUser.isAdmin &&
-                Objects.equals(login, ((User) user).login) &&
-                BCrypt.checkpw(password, ((User) user).passwordHash);
+        return Objects.equals(login, otherUser.login) &&
+                BCrypt.checkpw(password, otherUser.passwordHash);
     }
 }

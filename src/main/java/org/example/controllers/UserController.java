@@ -11,6 +11,7 @@ public class UserController {
     public void addNewUser(User user) {
         userService.addNewUser(user);
     }
+    // Ошибки отлови в контроллерах
 
     public boolean isUserExists(User user) {
         return userService.isUserExists(user);

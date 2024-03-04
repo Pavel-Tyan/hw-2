@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.models.User;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,15 +15,17 @@ public class Menu {
     @Setter(AccessLevel.PRIVATE)
     List<MenuState> menuStates;
 
-    private boolean hasLogged;
+    @Setter
+    private User user;
 
     public void showMenu() {
         for (int i = 0; i < menuStates.size(); i++) {
             System.out.printf("%d %s%n", i + 1, menuStates.get(i).getCommandInfo());
         }
     }
-    public void doCommand(int commandNumber, boolean hasLogged) {
-        menuStates.get(commandNumber).doCommand(hasLogged);
+    public void doCommand(int commandNumber) {
+        menuStates.get(commandNumber).doCommand(user);
+        System.out.println();
     }
 
     public void selectCommand() {
@@ -31,10 +34,12 @@ public class Menu {
         int commandNumber;
 
         do {
+            System.out.println();
             System.out.print("Введите номер команды, чтобы продолжить: ");
 
             try {
                 commandNumber = scanner.nextInt();
+                System.out.println();
             } catch (Exception e) {
                 System.out.println();
                 System.out.println("Некорректный ввод числа. Повторите попытку.");
@@ -45,9 +50,10 @@ public class Menu {
                 System.out.println("Некорректный номер команды. Повторите попытку.");
                 showMenu();
             } else {
-                doCommand(commandNumber - 1, hasLogged);
+                doCommand(commandNumber - 1);
                 break;
             }
+
 
         } while (true);
     }

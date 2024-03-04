@@ -5,36 +5,34 @@ import org.example.controllers.UserController;
 import org.example.exceptions.ResourceAlreadyExistsException;
 import org.example.models.User;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
 @AllArgsConstructor
-public class AuthState implements MenuState{
+public class AuthState implements MenuState {
+
     private UserController userController;
-
     @Override
-    public void doCommand(boolean hasLogged) {
-        String login;
-        String password;
-
-        if (hasLogged) {
-            System.out.println("Чтобы войти в другой аккаунт, выйдите из текущего аккаунта.");
-            System.out.println();
+    public void doCommand(User user) {
+        if (user != null) {
+            System.out.println("Вы уже вошли в какой-то аккаунт.");
             return;
         }
 
+        String login;
+        String password;
+
         Scanner scanner = new Scanner(System.in);
 
-        hasLogged = false;
+        boolean hasLogged = false;
 
         while (!hasLogged) {
             System.out.print("Введите логин: ");
-            login = scanner.nextLine();
+            login = scanner.next();
 
             System.out.println();
 
             System.out.print("Введите пароль: ");
-            password = scanner.nextLine();
+            password = scanner.next();
 
             if (login == null || password == null) {
                 System.out.println("Логин и пароль не должны быть пустыми.");
@@ -50,14 +48,10 @@ public class AuthState implements MenuState{
             }
 
             try {
-                User user = new User(login, password);
                 if (userController.isUserExists(new User(login, password))) {
                     hasLogged = true;
                 } else {
                     System.out.println("Такого пользователя не существует");
-                    System.out.println(user.getLogin());
-                    System.out.println(user.getPasswordHash());
-
                     break;
                 }
 
@@ -73,6 +67,6 @@ public class AuthState implements MenuState{
 
     @Override
     public String getCommandInfo() {
-        return "Вход в аккаунт.";
+        return "Войти в аккаунт.";
     }
 }

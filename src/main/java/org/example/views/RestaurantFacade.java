@@ -32,13 +32,9 @@ public class RestaurantFacade {
 
         boolean isEnd = false;
 
-        while (!isEnd) { //
-            try {
-                menu.showMenu();
-                menu.selectCommand();
-            } catch (Exception e) {
-                System.out.print(e.getMessage());
-            }
+        while (!isEnd) {
+            menu.showMenu();
+            menu.selectCommand();
         }
     }
 
@@ -52,17 +48,21 @@ public class RestaurantFacade {
         mealController = new MealController(mealService);
         userController = new UserController(userService);
 
+
         MenuState registerState = new RegisterState(userController);
         MenuState authState = new AuthState(userController);
+        MenuState logOutState = new LogOutState();
         MenuState showMealsMenuState = new ShowMealsMenuState(mealController);
         MenuState exitState = new ExitState();
 
         List<MenuState> menuStates = new ArrayList<MenuState>();
+
         menuStates.add(registerState);
         menuStates.add(authState);
+        menuStates.add(logOutState);
         menuStates.add(showMealsMenuState);
         menuStates.add(exitState);
 
-        menu = new Menu(menuStates, false);
+        menu = new Menu(menuStates, null);
     }
 }
