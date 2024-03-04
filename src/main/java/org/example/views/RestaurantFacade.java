@@ -48,11 +48,11 @@ public class RestaurantFacade {
         mealController = new MealController(mealService);
         userController = new UserController(userService);
 
-
         MenuState registerState = new RegisterState(userController);
         MenuState authState = new AuthState(userController);
         MenuState showMealsMenuState = new ShowMealsMenuState(mealController);
         MenuState addNewMeal = new AddNewMealState(mealController);
+        MenuState updateMeal = new UpdateMealState(mealController);
         MenuState deleteMeal = new DeleteMealState(mealController);
         MenuState exitState = new ExitState();
 
@@ -62,6 +62,7 @@ public class RestaurantFacade {
         menuStates.add(authState);
         menuStates.add(showMealsMenuState);
         menuStates.add(addNewMeal);
+        menuStates.add(updateMeal);
         menuStates.add(deleteMeal);
         menuStates.add(exitState);
 

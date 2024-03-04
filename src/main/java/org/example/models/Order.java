@@ -1,7 +1,9 @@
 package org.example.models;
 
 
+import java.util.ArrayList;
+
 public class Order {
     User customer;
-    Meal meal;
+    ArrayList<Meal> orderedMeals;
 }

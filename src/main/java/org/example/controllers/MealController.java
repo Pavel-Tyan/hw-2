@@ -3,17 +3,18 @@ package org.example.controllers;
 import lombok.AllArgsConstructor;
 import org.example.exceptions.ResourceNotFoundException;
 import org.example.models.Meal;
+import org.example.models.Order;
 import org.example.services.MealService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 public class MealController {
-    private MealService mealMenuService;
-
+    private MealService mealService;
     public boolean isMealExists(String name) {
         try {
-            mealMenuService.findMealByName(name);
+            mealService.findMealByName(name);
         } catch (ResourceNotFoundException e) {
             return false;
         }
@@ -21,15 +22,22 @@ public class MealController {
         return true;
     }
     public void addNewMeal(Meal meal) {
-        mealMenuService.addNewMeal(meal);
+        mealService.addNewMeal(meal);
+    }
+
+    public void updateMeal(Meal meal) {
+        mealService.updateMeal(meal);
     }
 
     public void deleteMealByName(String name) {
-        mealMenuService.deleteMealByName(name);
+        mealService.deleteMealByName(name);
     }
 
+    public Meal findMealByName(String name) {
+        return mealService.findMealByName(name);
+    }
     public List<Meal> findAllMeals() {
-        return mealMenuService.findAllMeals();
+        return mealService.findAllMeals();
     }
 
 }

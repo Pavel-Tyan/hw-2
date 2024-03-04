@@ -11,7 +11,7 @@ public class MealRepository {
     private final String fileName = "meals.dat";
 
     @Getter
-    private ArrayList<Meal> meals;
+    private ArrayList<Meal> meals = new ArrayList<Meal>();
     public MealRepository() {
         ArrayList<Meal> savedMeals = new ArrayList<Meal>();
 

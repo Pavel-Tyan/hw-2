@@ -11,7 +11,7 @@ public class Main {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.dat")))
         {
             ArrayList<User> users = new ArrayList<>();
-            users.add(new User( "ddd", "admin"));
+            users.add(new User( "admin", "admin"));
             oos.writeObject(users);
         }
         catch (IOException ex) {

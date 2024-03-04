@@ -8,7 +8,7 @@ import org.example.models.User;
 import java.util.Scanner;
 
 @AllArgsConstructor
-public class AddNewMealState implements MenuState{
+public class UpdateMealState implements MenuState{
     private MealController mealController;
     @Override
     public User doCommand(User user) {
@@ -17,7 +17,7 @@ public class AddNewMealState implements MenuState{
             return user;
         }
 
-        boolean hasAdded = false;
+        boolean hasUpdated = false;
         Scanner scanner = new Scanner(System.in);
 
         String name;
@@ -25,9 +25,9 @@ public class AddNewMealState implements MenuState{
         int count;
         int cookingTimeMinutes;
 
-        while (!hasAdded) {
+        while (!hasUpdated) {
             try {
-                System.out.println("Введите данные о новом блюде");
+                System.out.println("Введите данные о блюде, которое хотите изменить");
 
                 System.out.print("Название блюда: ");
                 name = scanner.next();
@@ -48,9 +48,9 @@ public class AddNewMealState implements MenuState{
                 cookingTimeMinutes = scanner.nextInt();
 
                 Meal meal = new Meal(price, name, count, cookingTimeMinutes);
-                mealController.addNewMeal(meal);
-                hasAdded = true;
-                System.out.println("Данные о блюде успешно добавлены.");
+                mealController.updateMeal(meal);
+                System.out.println("Данные о блюде успешно обновлены");
+                hasUpdated = true;
             } catch (Exception ex) {
                 throw ex;
             }
@@ -61,6 +61,6 @@ public class AddNewMealState implements MenuState{
 
     @Override
     public String getCommandInfo() {
-        return "Добавить в меню новое блюдо";
+        return "Обновить данные о блюде.";
     }
 }
