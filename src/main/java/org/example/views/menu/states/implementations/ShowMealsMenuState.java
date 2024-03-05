@@ -13,6 +13,10 @@ public class ShowMealsMenuState implements MenuState {
     private MealController mealController;
     @Override
     public User doCommand(User user) {
+        if (mealController.findAllMeals().size() == 0) {
+            System.out.println("Меню пустое.");
+            return user;
+        }
         for (Meal meal : mealController.findAllMeals()) {
             System.out.println(String.format("Название: %s, цена: %f, количество: %d, " +
                     "время готовки в минутах: %d",

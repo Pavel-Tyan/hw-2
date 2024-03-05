@@ -54,7 +54,7 @@ public class AuthState implements MenuState {
                 }
 
                 hasLogged = true;
-
+                System.out.println();
                 System.out.print("Вы успешно вошли в аккаунт.");
                 System.out.println();
                 return currentUser;
@@ -68,6 +68,6 @@ public class AuthState implements MenuState {
 
     @Override
     public String getCommandInfo() {
-        return "Войти в аккаунт / Сменить аккаунт.";
+        return "Войти в аккаунт / Сменить аккаунт";
     }
 }

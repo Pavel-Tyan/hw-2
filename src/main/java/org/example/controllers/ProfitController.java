@@ -12,7 +12,7 @@ public class ProfitController {
     }
 
     public void updateProfit(Profit updatedProfit) {
-        return;
+        profitService.updateProfit(updatedProfit);
     }
 
     public void saveProfit() {

@@ -23,6 +23,6 @@ public class ShowProfitState implements MenuState {
 
     @Override
     public String getCommandInfo() {
-        return "Показать прибыль ресторана.";
+        return "Показать прибыль ресторана";
     }
 }

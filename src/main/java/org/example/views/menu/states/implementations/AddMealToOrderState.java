@@ -10,6 +10,7 @@ import org.example.models.User;
 import org.example.views.menu.states.MenuState;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @AllArgsConstructor
@@ -42,7 +43,14 @@ public class AddMealToOrderState implements MenuState {
             }
 
             System.out.print("Введите число порций: ");
-            count = scanner.nextInt(); //Отлови ошибку ввода
+
+            try {
+                count = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Некорректный ввод данных.");
+                return user;
+            }
+
             Meal currentMeal = mealController.findMealByName(mealName);
 
             Meal orderedMeal = new Meal(
@@ -55,9 +63,19 @@ public class AddMealToOrderState implements MenuState {
             Order currentOrder = new Order();
             if (orderController.isOrderExists(user.getLogin())) {
                 Order savedOrder = orderController.findOrderByUserName(user.getLogin());
+
+                ArrayList<Meal> updatedOrderedMeals = new ArrayList<Meal>();
+                for (Meal meal: savedOrder.getOrderedMeals()) {
+                    updatedOrderedMeals.add(new Meal(
+                            meal.getPrice(),
+                            meal.getName(),
+                            meal.getCount(),
+                            meal.getCookingTimeMinutes()
+                    ));
+                }
                 currentOrder = new Order(
                         savedOrder.getCustomer(),
-                        savedOrder.getOrderedMeals()
+                        updatedOrderedMeals
                 );
                 orderController.deleteOrderByUserName(user.getLogin());
             } else {
@@ -86,6 +104,6 @@ public class AddMealToOrderState implements MenuState {
 
     @Override
     public String getCommandInfo() {
-        return "Добавить блюдо в заказ.";
+        return "Добавить блюдо в заказ";
     }
 }

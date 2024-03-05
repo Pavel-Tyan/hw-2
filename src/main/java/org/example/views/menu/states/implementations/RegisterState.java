@@ -58,6 +58,6 @@ public class RegisterState implements MenuState {
 
     @Override
     public String getCommandInfo() {
-        return "Зарегистрироваться.";
+        return "Зарегистрироваться";
     }
 }

@@ -22,22 +22,27 @@ public class DeleteMealState implements MenuState {
         boolean hasDeleted = false;
 
         while (!hasDeleted) {
-            System.out.println("Введите название блюда, которое хотите удалить: ");
+            System.out.println("Введите название блюда, которое хотите удалить (С большой буквы): ");
             name = scanner.next();
 
             if (name == null) {
                 System.out.println("Вы не ввели имя.");
             } else {
+                if (!mealController.isMealExists(name)) {
+                    System.out.println("Такого блюда нет в меню.");
+                    return user;
+                }
                 mealController.deleteMealByName(name);
                 hasDeleted = true;
             }
         }
 
+        System.out.println("Блюдо удалено.");
         return user;
     }
 
     @Override
     public String getCommandInfo() {
-        return "Удалить блюдо из меню.";
+        return "Удалить блюдо из меню";
     }
 }

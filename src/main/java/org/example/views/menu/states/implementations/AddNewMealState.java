@@ -6,6 +6,8 @@ import org.example.models.Meal;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @AllArgsConstructor
@@ -22,39 +24,55 @@ public class AddNewMealState implements MenuState {
         Scanner scanner = new Scanner(System.in);
 
         String name;
-        double price;
-        int count;
-        int cookingTimeMinutes;
+        double price = 0;
+        int count = 0;
+        int cookingTimeMinutes = 0;
 
         while (!hasAdded) {
+            System.out.println("Введите данные о новом блюде");
+
+
+            System.out.print("Название блюда: ");
+
+            scanner.next();
+            name = scanner.next();
+
+            System.out.println();
+
+            System.out.print("Цена за 1 порцию: ");
+
             try {
-                System.out.println("Введите данные о новом блюде");
-
-                System.out.print("Название блюда: ");
-                name = scanner.next();
-
-                System.out.println();
-
-                System.out.print("Цена за 1 порцию: ");
                 price = scanner.nextDouble();
-
-                System.out.println();
-
-                System.out.print("Количество порций: ");
-                count = scanner.nextInt();
-
-                System.out.println();
-
-                System.out.print("Время готовки в минутах: ");
-                cookingTimeMinutes = scanner.nextInt();
-
-                Meal meal = new Meal(price, name, count, cookingTimeMinutes);
-                mealController.addNewMeal(meal);
-                hasAdded = true;
-                System.out.println("Данные о блюде успешно добавлены.");
-            } catch (Exception ex) {
-                throw ex;
+            } catch (InputMismatchException e) {
+                System.out.println("Некорректный ввод данных.");
+                continue;
             }
+
+
+            System.out.println();
+
+            System.out.print("Количество порций: ");
+
+            try {
+                count = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Некорректный ввод данных.");
+            }
+
+            System.out.println();
+
+            System.out.print("Время готовки в минутах: ");
+
+            try {
+                cookingTimeMinutes = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Некорректный ввод данных.");
+            }
+
+            Meal meal = new Meal(price, name, count, cookingTimeMinutes);
+            mealController.addNewMeal(meal);
+            hasAdded = true;
+            System.out.println("Данные о блюде успешно добавлены.");
         }
 
         return user;

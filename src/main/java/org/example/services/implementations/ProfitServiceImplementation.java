@@ -16,7 +16,7 @@ public class ProfitServiceImplementation implements ProfitService {
 
     @Override
     public void updateProfit(Profit updatedProfit) {
-        return;
+        profitRepository.setProfit(updatedProfit);
     }
 
     @Override

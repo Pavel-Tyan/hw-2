@@ -63,16 +63,18 @@ public class OrderServiceImplementation implements OrderService {
                         throw new ResourceNotEnoughException("Недостаточно порций.");
                     }
 
-                    Meal updatedMeal = new Meal(
-                            meal.getPrice(),
-                            meal.getName(),
-                            meal.getCount() + currentMeal.getCount(),
-                            meal.getCookingTimeMinutes()
-                    );
+                    if (currentMeal.getName().equals(mealName)) {
+                        Meal updatedMeal = new Meal(
+                                meal.getPrice(),
+                                meal.getName(),
+                                meal.getCount() + currentMeal.getCount(),
+                                meal.getCookingTimeMinutes()
+                        );
 
-                    currentOrder.getOrderedMeals().remove(currentMeal);
-                    currentOrder.getOrderedMeals().add(updatedMeal);
-                    return;
+                        currentOrder.getOrderedMeals().remove(currentMeal);
+                        currentOrder.getOrderedMeals().add(updatedMeal);
+                        return;
+                    }
                 }
 
                 if (meal.getCount() > maxPortionsCount) {

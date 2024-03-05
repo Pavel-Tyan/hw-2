@@ -6,6 +6,7 @@ import org.example.models.Meal;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 @AllArgsConstructor
@@ -36,17 +37,35 @@ public class UpdateMealState implements MenuState {
                 System.out.println();
 
                 System.out.print("Цена за 1 порцию: ");
-                price = scanner.nextDouble();
+
+                try {
+                    price = scanner.nextDouble();
+                } catch (InputMismatchException e) {
+                    System.out.println("Некорректный ввод данных.");
+                    return user;
+                }
 
                 System.out.println();
 
                 System.out.print("Количество порций: ");
-                count = scanner.nextInt();
+
+                try {
+                    count = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Некорректный ввод данных.");
+                    return user;
+                }
 
                 System.out.println();
 
                 System.out.print("Время готовки в минутах: ");
-                cookingTimeMinutes = scanner.nextInt();
+
+                try {
+                    cookingTimeMinutes = scanner.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Некорректный ввод данных.");
+                    return user;
+                }
 
                 Meal meal = new Meal(price, name, count, cookingTimeMinutes);
                 mealController.updateMeal(meal);
@@ -62,6 +81,6 @@ public class UpdateMealState implements MenuState {
 
     @Override
     public String getCommandInfo() {
-        return "Обновить данные о блюде.";
+        return "Обновить данные о блюде";
     }
 }

@@ -19,7 +19,7 @@ public class ShowOrderState implements MenuState {
         }
 
         if (!orderController.isOrderExists(user.getLogin())) {
-            System.out.println("Вы не выбрали блюда для заказа");
+            System.out.println("Вы не выбрали блюда для заказа либо вы уже получили заказ");
             return user;
         }
 
