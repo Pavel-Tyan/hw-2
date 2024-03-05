@@ -20,7 +20,7 @@ public class UserServiceImplementation implements UserService {
             return false;
 
         for (User currentUser: userRepository.getUsers()) {
-            if (user.equals(currentUser)) {
+            if (Objects.equals(user.getLogin(), currentUser.getLogin())) {
                 return true;
             }
         }
@@ -43,5 +43,16 @@ public class UserServiceImplementation implements UserService {
 
         userRepository.getUsers().add(user);
         userRepository.serializeUsers();
+    }
+
+    @Override
+    public User getUserByName(String userName) {
+        for (User currentUser: userRepository.getUsers()) {
+            if (currentUser.getLogin().equals(userName)) {
+                return currentUser;
+            }
+        }
+
+        throw new ResourceNotFoundException("Такого пользователя не существует.");
     }
 }

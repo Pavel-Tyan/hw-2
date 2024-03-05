@@ -3,6 +3,7 @@ package org.example.views.menu.states.implementations;
 import lombok.AllArgsConstructor;
 import org.example.controllers.UserController;
 import org.example.exceptions.ResourceAlreadyExistsException;
+import org.example.exceptions.ResourceNotFoundException;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
 
@@ -45,7 +46,7 @@ public class AuthState implements MenuState {
             }
 
             try {
-                currentUser = new User(login, password);
+                currentUser = userController.getUserByName(login);
                 if (userController.isUserExists(currentUser)) {
                     hasLogged = true;
                 } else {
@@ -58,9 +59,10 @@ public class AuthState implements MenuState {
                 System.out.print("Вы успешно вошли в аккаунт.");
                 System.out.println();
                 return currentUser;
-            } catch (ResourceAlreadyExistsException ex) {
+            } catch (ResourceAlreadyExistsException | ResourceNotFoundException ex) {
                 System.out.println(ex.getMessage());
                 System.out.println();
+                return user;
             }
         }
         return null;

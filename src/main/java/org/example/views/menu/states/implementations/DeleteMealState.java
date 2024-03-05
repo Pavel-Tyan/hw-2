@@ -22,7 +22,7 @@ public class DeleteMealState implements MenuState {
         boolean hasDeleted = false;
 
         while (!hasDeleted) {
-            System.out.println("Введите название блюда, которое хотите удалить (С большой буквы): ");
+            System.out.print("Введите название блюда, которое хотите удалить: ");
             name = scanner.next();
 
             if (name == null) {

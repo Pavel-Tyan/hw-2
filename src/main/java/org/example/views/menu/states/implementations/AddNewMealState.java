@@ -2,6 +2,7 @@ package org.example.views.menu.states.implementations;
 
 import lombok.AllArgsConstructor;
 import org.example.controllers.MealController;
+import org.example.exceptions.ResourceAlreadyExistsException;
 import org.example.models.Meal;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
@@ -34,7 +35,6 @@ public class AddNewMealState implements MenuState {
 
             System.out.print("Название блюда: ");
 
-            scanner.next();
             name = scanner.next();
 
             System.out.println();
@@ -70,7 +70,12 @@ public class AddNewMealState implements MenuState {
             }
 
             Meal meal = new Meal(price, name, count, cookingTimeMinutes);
-            mealController.addNewMeal(meal);
+            try {
+                mealController.addNewMeal(meal);
+            } catch(ResourceAlreadyExistsException ex) {
+                System.out.println(ex.getMessage());
+                return user;
+            }
             hasAdded = true;
             System.out.println("Данные о блюде успешно добавлены.");
         }

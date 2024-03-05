@@ -8,4 +8,6 @@ public interface UserService {
     boolean isUserExists(User user);
     List<User> findAllUsers();
     void addNewUser(User user);
+
+    User getUserByName(String userName);
 }

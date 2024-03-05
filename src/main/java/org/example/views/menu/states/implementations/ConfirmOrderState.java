@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.example.controllers.MealController;
 import org.example.controllers.OrderController;
 import org.example.controllers.ProfitController;
+import org.example.exceptions.ResourceNotFoundException;
 import org.example.models.Meal;
 import org.example.models.Order;
 import org.example.models.Profit;
@@ -48,10 +49,15 @@ public class ConfirmOrderState implements MenuState {
             System.out.println();
             return user;
         }
-
-        if (!orderController.isOrderExists(user.getLogin()) &&
-                orderController.findOrderByUserName(user.getLogin()).getOrderedMeals().isEmpty()) {
-            System.out.println("Вы не выбрали блюда для заказа");
+        try {
+            if (!orderController.isOrderExists(user.getLogin()) &&
+                    orderController.findOrderByUserName(user.getLogin()).getOrderedMeals().isEmpty()) {
+                System.out.println("Вы не выбрали блюда для заказа");
+                return user;
+            }
+        } catch(ResourceNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return user;
         }
 
         Order currentOrder = orderController.findOrderByUserName(user.getLogin());

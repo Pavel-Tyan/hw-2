@@ -8,10 +8,13 @@ import org.example.services.UserService;
 public class UserController {
     private UserService userService;
 
+    public User getUserByName(String userName) {
+        return userService.getUserByName(userName);
+    }
+
     public void addNewUser(User user) {
         userService.addNewUser(user);
     }
-    // Ошибки отлови в контроллерах
 
     public boolean isUserExists(User user) {
         return userService.isUserExists(user);

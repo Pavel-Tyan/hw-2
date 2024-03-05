@@ -25,7 +25,7 @@ public class User implements Serializable {
         String salt = BCrypt.gensalt();
         password = userPassword;
         passwordHash = BCrypt.hashpw(userPassword, salt);
-        isAdmin = true;
+        isAdmin = false;
     }
     @Override
     public boolean equals(Object user) {

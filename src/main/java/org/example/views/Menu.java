@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,7 +42,7 @@ public class Menu {
             try {
                 commandNumber = scanner.nextInt();
                 System.out.println();
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println();
                 System.out.println("Некорректный ввод числа. Повторите попытку.");
                 break;

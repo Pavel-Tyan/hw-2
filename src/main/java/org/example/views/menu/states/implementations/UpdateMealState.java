@@ -2,6 +2,7 @@ package org.example.views.menu.states.implementations;
 
 import lombok.AllArgsConstructor;
 import org.example.controllers.MealController;
+import org.example.exceptions.ResourceNotFoundException;
 import org.example.models.Meal;
 import org.example.models.User;
 import org.example.views.menu.states.MenuState;
@@ -28,7 +29,6 @@ public class UpdateMealState implements MenuState {
         int cookingTimeMinutes;
 
         while (!hasUpdated) {
-            try {
                 System.out.println("Введите данные о блюде, которое хотите изменить");
 
                 System.out.print("Название блюда: ");
@@ -68,12 +68,17 @@ public class UpdateMealState implements MenuState {
                 }
 
                 Meal meal = new Meal(price, name, count, cookingTimeMinutes);
-                mealController.updateMeal(meal);
+
+                try {
+                    mealController.updateMeal(meal);
+                } catch(ResourceNotFoundException ex) {
+                    System.out.println(ex.getMessage());
+                    System.out.println();
+                    return user;
+                }
+
                 System.out.println("Данные о блюде успешно обновлены");
                 hasUpdated = true;
-            } catch (Exception ex) {
-                throw ex;
-            }
         }
 
         return user;
