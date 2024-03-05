@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.models.User;
+import org.example.views.menu.states.MenuState;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,8 +1,9 @@
-package org.example.views;
+package org.example.views.menu.states.implementations;
 
 import org.example.models.User;
+import org.example.views.menu.states.MenuState;
 
-public class ExitState implements MenuState{
+public class ExitState implements MenuState {
 
     @Override
     public User doCommand(User user) {

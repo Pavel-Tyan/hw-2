@@ -1,16 +1,15 @@
-package org.example.views;
+package org.example.views.menu.states.implementations;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.example.controllers.MealController;
 import org.example.models.Meal;
 import org.example.models.User;
-
-import java.util.List;
+import org.example.views.menu.states.MenuState;
 
 @AllArgsConstructor
 @Getter
-public class ShowMealsMenuState implements MenuState{
+public class ShowMealsMenuState implements MenuState {
     private MealController mealController;
     @Override
     public User doCommand(User user) {

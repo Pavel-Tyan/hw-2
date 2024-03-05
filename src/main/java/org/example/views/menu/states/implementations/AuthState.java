@@ -1,14 +1,16 @@
-package org.example.views;
+package org.example.views.menu.states.implementations;
 
 import lombok.AllArgsConstructor;
 import org.example.controllers.UserController;
 import org.example.exceptions.ResourceAlreadyExistsException;
 import org.example.models.User;
+import org.example.views.menu.states.MenuState;
 
 import java.util.Scanner;
 
 @AllArgsConstructor
-public class RegisterState implements MenuState{
+public class AuthState implements MenuState {
+
     private UserController userController;
     @Override
     public User doCommand(User user) {
@@ -17,9 +19,10 @@ public class RegisterState implements MenuState{
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean hasRegistered = false;
+        boolean hasLogged = false;
+        User currentUser;
 
-        while (!hasRegistered) {
+        while (!hasLogged) {
             System.out.print("Введите логин: ");
             login = scanner.next();
 
@@ -42,21 +45,29 @@ public class RegisterState implements MenuState{
             }
 
             try {
-                userController.addNewUser(new User(login, password));
-                hasRegistered = true;
-                System.out.print("Вы успешно зарегистрировались.");
+                currentUser = new User(login, password);
+                if (userController.isUserExists(currentUser)) {
+                    hasLogged = true;
+                } else {
+                    System.out.println("Такого пользователя не существует");
+                    break;
+                }
+
+                hasLogged = true;
+
+                System.out.print("Вы успешно вошли в аккаунт.");
                 System.out.println();
+                return currentUser;
             } catch (ResourceAlreadyExistsException ex) {
                 System.out.println(ex.getMessage());
                 System.out.println();
             }
         }
-
-        return user;
+        return null;
     }
 
     @Override
     public String getCommandInfo() {
-        return "Зарегистрироваться.";
+        return "Войти в аккаунт / Сменить аккаунт.";
     }
 }

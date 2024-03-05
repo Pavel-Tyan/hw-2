@@ -1,4 +1,4 @@
-package org.example.views;
+package org.example.views.menu.states;
 
 import org.example.models.User;
 

@@ -13,6 +13,8 @@ import org.example.services.UserService;
 import org.example.services.implementations.MealServiceImplementation;
 import org.example.services.implementations.OrderServiceImplementation;
 import org.example.services.implementations.UserServiceImplementation;
+import org.example.views.menu.states.*;
+import org.example.views.menu.states.implementations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,8 @@ public class RestaurantFacade {
     public void configureMenu() {
         MenuState registerState = new RegisterState(userController);
         MenuState authState = new AuthState(userController);
+        MenuState addMealToOrderState = new AddMealToOrderState(orderController, mealController);
+        MenuState showOrderState = new ShowOrderState(orderController);
         MenuState showMealsMenuState = new ShowMealsMenuState(mealController);
         MenuState addNewMeal = new AddNewMealState(mealController);
         MenuState updateMeal = new UpdateMealState(mealController);
@@ -82,6 +86,8 @@ public class RestaurantFacade {
 
         menuStates.add(registerState);
         menuStates.add(authState);
+        menuStates.add(addMealToOrderState);
+        menuStates.add(showOrderState);
         menuStates.add(showMealsMenuState);
         menuStates.add(addNewMeal);
         menuStates.add(updateMeal);

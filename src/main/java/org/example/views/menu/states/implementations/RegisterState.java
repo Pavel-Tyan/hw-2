@@ -1,15 +1,15 @@
-package org.example.views;
+package org.example.views.menu.states.implementations;
 
 import lombok.AllArgsConstructor;
 import org.example.controllers.UserController;
 import org.example.exceptions.ResourceAlreadyExistsException;
 import org.example.models.User;
+import org.example.views.menu.states.MenuState;
 
 import java.util.Scanner;
 
 @AllArgsConstructor
-public class AuthState implements MenuState {
-
+public class RegisterState implements MenuState {
     private UserController userController;
     @Override
     public User doCommand(User user) {
@@ -18,10 +18,9 @@ public class AuthState implements MenuState {
 
         Scanner scanner = new Scanner(System.in);
 
-        boolean hasLogged = false;
-        User currentUser;
+        boolean hasRegistered = false;
 
-        while (!hasLogged) {
+        while (!hasRegistered) {
             System.out.print("Введите логин: ");
             login = scanner.next();
 
@@ -44,29 +43,21 @@ public class AuthState implements MenuState {
             }
 
             try {
-                currentUser = new User(login, password);
-                if (userController.isUserExists(currentUser)) {
-                    hasLogged = true;
-                } else {
-                    System.out.println("Такого пользователя не существует");
-                    break;
-                }
-
-                hasLogged = true;
-
-                System.out.print("Вы успешно вошли в аккаунт.");
+                userController.addNewUser(new User(login, password));
+                hasRegistered = true;
+                System.out.print("Вы успешно зарегистрировались.");
                 System.out.println();
-                return currentUser;
             } catch (ResourceAlreadyExistsException ex) {
                 System.out.println(ex.getMessage());
                 System.out.println();
             }
         }
-        return null;
+
+        return user;
     }
 
     @Override
     public String getCommandInfo() {
-        return "Войти в аккаунт / Сменить аккаунт.";
+        return "Зарегистрироваться.";
     }
 }
