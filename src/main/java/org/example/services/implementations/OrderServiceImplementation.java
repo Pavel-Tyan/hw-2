@@ -26,6 +26,7 @@ public class OrderServiceImplementation implements OrderService {
         return false;
     }
 
+    @Override
     public double getOrderPrice(Order order) {
         double price = 0;
 
@@ -35,6 +36,7 @@ public class OrderServiceImplementation implements OrderService {
 
         return price;
     }
+    @Override
     public void addOrder(Order order) {
         for (Order currentOrder: orderRepository.getOrders()) {
             if (Objects.equals(order.getCustomer().getLogin(),

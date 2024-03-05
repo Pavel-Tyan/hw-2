@@ -1,5 +1,6 @@
 package org.example;
 import org.example.models.Meal;
+import org.example.models.Profit;
 import org.example.models.User;
 import org.example.views.RestaurantFacade;
 import java.io.*;
@@ -30,6 +31,14 @@ public class Main {
 //        }
 //        catch(IOException ex){
 //            System.out.println("Сериализация еды не удалась");
+//        }
+//        Profit profit = new Profit();
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("profit.dat")))
+//        {
+//            oos.writeObject(profit);
+//        }
+//        catch (IOException ex) {
+//            System.out.println("Сериализация информации о прибыли не удалась");
 //        }
 
         try {
